@@ -486,8 +486,7 @@ for (row in 1:3){
   print(breakdown_explainer(dat))
 }
 ```
-![Picture25](https://github.com/dingy21/loan-status/assets/134649288/03648c4e-c202-487b-8ec0-97a4739b3cea)
-![Picture26](https://github.com/dingy21/loan-status/assets/134649288/c539d391-c4a3-47ad-a640-615be0200657)
+![Picture25](https://github.com/dingy21/loan-status/assets/134649288/03648c4e-c202-487b-8ec0-97a4739b3cea)![Picture26](https://github.com/dingy21/loan-status/assets/134649288/c539d391-c4a3-47ad-a640-615be0200657)
 ## Isolation Recipe
 ```
 iso_recipe <- recipe(~.,loan) %>%
