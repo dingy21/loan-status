@@ -279,6 +279,7 @@ evaluate_models(xgb_workflow_fit, "XGBoost Model")
 evaluate_models(rf_workflow_fit, "Random Forest Model")
 evaluate_models(log_workflow_fit, "Logistic Model")
 ```
+![Picture4](https://github.com/dingy21/loan-status/assets/134649288/de542a5e-f335-40fc-a4d7-b34cca49ff04)
 ## Top Predictions
 ```
 top_tp <- xgb_scored_test %>%
@@ -376,6 +377,13 @@ plot(pdp_loan_amnt) + labs(title = "Partial Dependence Plot",
                            x = "Amount of Loan",
                            y = "Average Impact on Prediction")
 ```
+![Picture5](https://github.com/dingy21/loan-status/assets/134649288/80b376a4-6c79-4fc3-879e-d2cd7e727886)
+![Picture6](https://github.com/dingy21/loan-status/assets/134649288/5b0644c6-057e-4268-8e80-a77ec9a15f81)
+![Picture7](https://github.com/dingy21/loan-status/assets/134649288/d15d5e2e-c8c2-4b50-bc23-bc3efa8b1aba)
+![Picture8](https://github.com/dingy21/loan-status/assets/134649288/ea8598e4-5165-4258-9f52-1cf1b37be503)
+![Picture9](https://github.com/dingy21/loan-status/assets/134649288/b53e6748-742b-40b8-98a8-1bcf0fa2a494)
+![Picture10](https://github.com/dingy21/loan-status/assets/134649288/7d6f59e3-2b6c-4166-acba-a1d9aed55aa5)
+![Picture11](https://github.com/dingy21/loan-status/assets/134649288/7ea4f3a0-6e18-483b-8878-3f474903aadc)
 ## Shap & Breakdown Plots
 ```
 tidy_explainer <- explain_tidymodels(xgb_workflow_fit, data = test,
@@ -419,6 +427,8 @@ for (row in 3:3){
   print(breakdown_explainer(dat))
 }
 ```
+![Picture12](https://github.com/dingy21/loan-status/assets/134649288/df6f36c6-efc9-42ff-9f24-d5283d27465e)
+![Picture13](https://github.com/dingy21/loan-status/assets/134649288/be89874e-3128-49b5-8dc9-6ea81c2d72cf)
 ### False Positive
 ```
 shap_explain <- predict_parts(tidy_explainer, top_fp %>% head(1), type = "shap")
@@ -439,6 +449,8 @@ for (row in 1:3){
   print(breakdown_explainer(dat))
 }
 ```
+![Picture14](https://github.com/dingy21/loan-status/assets/134649288/50a3e626-ed27-46f2-a5e7-db21e65f1773)
+![Picture15](https://github.com/dingy21/loan-status/assets/134649288/cba21aaa-0337-402e-9f69-9827c82f465a)
 ### True Negative
 ```
 shap_explain <- predict_parts(tidy_explainer, top_tn %>% head(1), type = "shap")
@@ -459,6 +471,8 @@ for (row in 1:3){
   print(breakdown_explainer(dat))
 }
 ```
+![Picture16](https://github.com/dingy21/loan-status/assets/134649288/fd53f6a8-59ef-4654-b0d8-18c41e4bf10b)
+![Picture17](https://github.com/dingy21/loan-status/assets/134649288/369869e0-0bb2-4aca-8ff9-18672b4492ff)
 ### False Negative
 ```
 shap_explain <- predict_parts(tidy_explainer, bottom_fn %>% head(1), type = "shap")
@@ -547,6 +561,7 @@ train_pred %>%
 
 head(train_pred, 10)
 ```
+![Picture24](https://github.com/dingy21/loan-status/assets/134649288/9a6425dc-22cd-43b2-adcb-db3d5a87f789)
 ## Fit a Tree
 ```
 fmla <- as.formula(paste("anomaly ~ ", paste(iso_prep %>% colnames(), collapse= "+")))
@@ -564,6 +579,7 @@ library(rpart.plot)
 rpart.plot(outlier_tree$fit, clip.right.labs = FALSE,
            branch = .3, under = TRUE, roundint = FALSE, extra = 3)
 ```
+![Picture22](https://github.com/dingy21/loan-status/assets/134649288/c9e8e3eb-ad3d-4d39-822a-5c4ce53627b6)
 ## Global Anomaly Rules
 ```
 anomaly_rules <- rpart.rules(outlier_tree$fit, roundint = FALSE,
@@ -630,6 +646,7 @@ for (col in rule_cols){
 
 as.data.frame(anomaly_rules) %>% dplyr::select(rule, cover)
 ```
+![Picture23](https://github.com/dingy21/loan-status/assets/134649288/3d388674-3052-4d48-91ba-3d07b307b815)
 ```
 local_explainer <- function(ID){
   fmla <- as.formula(paste("anomaly ~ ", paste(iso_prep %>% colnames(), collapse= "+")))
